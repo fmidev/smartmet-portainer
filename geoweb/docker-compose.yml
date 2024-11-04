@@ -1,0 +1,25 @@
+services:
+  geoweb:
+    image: opengeoweb/geoweb
+    container_name: geoweb
+    restart: unless-stopped
+    environment:
+      - GW_APP_URL=https://geoweb.${APPDOMAIN:-local}
+      - GW_DEFAULT_THEME=lightTheme
+      - GW_FEATURE_APP_TITLE=GeoWeb
+      - GW_INITIAL_PRESETS_FILENAME=custom/initialPresets.json
+    labels:
+      - "traefik.http.routers.geoweb.entrypoints=websecure"
+      - "traefik.http.routers.geoweb.rule=Host(`geoweb.${APPDOMAIN:-local}`)"
+      - "traefik.http.services.geoweb.loadbalancer.server.port=8080"
+    networks:
+      - traefik-network
+    volumes:
+      - /smartmet/cnf/geoweb:/usr/share/nginx/html/assets/custom
+
+volumes:
+  geoweb-storage:
+  
+networks:
+    traefik-network:
+      external: true
