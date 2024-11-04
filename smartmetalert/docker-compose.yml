@@ -2,6 +2,7 @@ services:
   smartmetalert:
     image: fmidev/smartmetalert
     container_name: smartmetalert
+    restart: unless-stopped
     labels:
       - "traefik.http.routers.smartmetalert.entrypoints=websecure"
       - "traefik.http.routers.smartmetalert.rule=Host(`alert.${APPDOMAIN:-local}`)"
@@ -12,7 +13,6 @@ services:
       - /smartmet/editor/smartalert:/var/www/html/data
     networks:
       - traefik-network
-    restart: unless-stopped
     
 networks:
     traefik-network:
