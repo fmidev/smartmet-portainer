@@ -7,7 +7,7 @@ services:
       - GW_APP_URL=https://geoweb.${APPDOMAIN:-local}
       - GW_DEFAULT_THEME=lightTheme
       - GW_FEATURE_APP_TITLE=GeoWeb
-      - GW_INITIAL_PRESETS_FILENAME=assets/custom/initialPresets.json
+      - GW_INITIAL_PRESETS_FILENAME=custom/initialPresets.json
     labels:
       - "traefik.http.routers.geoweb.entrypoints=websecure"
       - "traefik.http.routers.geoweb.rule=Host(`geoweb.${APPDOMAIN:-local}`)"
