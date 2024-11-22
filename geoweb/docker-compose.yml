@@ -5,8 +5,9 @@ services:
     restart: unless-stopped
     environment:
       - GW_APP_URL=https://geoweb.${APPDOMAIN:-local}
+      - GW_AUTH_TOKEN_URL=${GW_AUTH_TOKEN_URL:-}
       - GW_DEFAULT_THEME=lightTheme
-      - GW_FEATURE_APP_TITLE=GeoWeb
+      - GW_FEATURE_APP_TITLE=${GW_FEATURE_APP_TITLE:-GeoWeb}
       - GW_INITIAL_PRESETS_FILENAME=custom/initialPresets.json
     labels:
       - "traefik.http.routers.geoweb.entrypoints=websecure"
